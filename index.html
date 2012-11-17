@@ -10,7 +10,8 @@
     <script>
         var o = {
             oauth_consumer_key: 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
-            oauth_signature_method: 'HMAC-SHA1'
+            oauth_signature_method: 'HMAC-SHA1',
+            oauth_version: '1.0a'
         };
         document.getElementById('authenticate').onclick = function() {
             o.oauth_timestamp = ohauth.timestamp();
@@ -26,9 +27,29 @@
                 .send(o)
                 .end(function(res) {
                     var token = stringQs(res.text);
-                    console.log(token);
+                    var at = 'http://api06.dev.openstreetmap.org/oauth/authorize';
+                    window.location = at + '?oauth_token=' + token.oauth_token + '&oauth_callback=' + ohauth.percentEncode('http://localhost:3000/');
                 });
         };
+
+        if (location.search) {
+            var oauth_token = stringQs(location.search.slice(1));
+            o.oauth_timestamp = ohauth.timestamp();
+            o.oauth_nonce = ohauth.nonce();
+            o['oauth.token'] = oauth_token.oauth_token;
+            var url = 'http://api06.dev.openstreetmap.org/oauth/access_token',
+                secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p';
+            o.oauth_signature = sha1().b64_hmac_sha1(
+                ohauth.percentEncode(secret) + '&',
+                ohauth.baseString('POST', url, o));
+            superagent
+                .post(url)
+                .type('form')
+                .send(o)
+                .end(function(res) {
+                    console.log(arguments);
+                });
+        }
     </script>
 </body>
 </HTML>
