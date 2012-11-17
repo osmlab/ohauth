@@ -1,74 +1,32 @@
 <!DOCTYPE html>
 <head>
     <title>OSM OAuth</title>
-    <script type="text/javascript" src="sha.js"></script>
-    <script type="text/javascript" src="superagent.js"></script>
 </head>
 <body>
     <button id='authenticate'>Authenticate</button>
+    <script type="text/javascript" src="sha.js"></script>
+    <script type="text/javascript" src="superagent.js"></script>
+    <script type="text/javascript" src="ohauth.js"></script>
     <script>
         var o = {
             oauth_consumer_key: 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
             oauth_signature_method: 'HMAC-SHA1'
         };
-
-        function qsString(obj) {
-            if (!obj) return '';
-            var pairs = [];
-            Object.keys(obj).sort().forEach(function(key) {
-                pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
-            });
-            return pairs.join('&');
-        };
-
-        function stringQs(str) {
-            str = trim(str);
-            return str.split('&').reduce(function(obj, pair){
-                var parts = pair.split('=');
-                obj[parts[0]] = (null == parts[1]) ? '' : decodeURIComponent(parts[1]);
-                return obj;
-            }, {});
-        }
-
-        function nonce() {
-            var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz',
-                length = 6,
-                result = '';
-            for (var i = 0; i < length; ++i) {
-                var rnum = Math.floor(Math.random() * chars.length);
-                result += chars.substring(rnum, rnum + 1);
-            }
-            return result;
-        }
-
-        function timestamp() { return ~~((+new Date()) / 1000); }
-
-        function percentEncode(s) {
-            return encodeURIComponent(s)
-            .replace(/\!/g, '%21')
-            .replace(/\*/g, '%2A')
-            .replace(/\'/g, '%27')
-            .replace(/\(/g, '%28')
-            .replace(/\)/g, '%29');
-        }
-
-        function baseString(method, url, params) {
-            return method + '&' + percentEncode(url) + '&' + percentEncode(qsString(params));
-        }
-
         document.getElementById('authenticate').onclick = function() {
-            o.oauth_timestamp = timestamp();
-            o.oauth_nonce = nonce();
-            var url = 'http://api06.dev.openstreetmap.org/oauth/request_token';
-            var secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p';
-            var key = percentEncode(secret) + '&';
-            o.oauth_signature = sha1().b64_hmac_sha1(key, baseString('POST', url, o));
+            o.oauth_timestamp = ohauth.timestamp();
+            o.oauth_nonce = ohauth.nonce();
+            var url = 'http://api06.dev.openstreetmap.org/oauth/request_token',
+                secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p';
+            o.oauth_signature = sha1().b64_hmac_sha1(
+                ohauth.percentEncode(secret) + '&',
+                ohauth.baseString('POST', url, o));
             superagent
                 .post('http://api06.dev.openstreetmap.org/oauth/request_token')
                 .type('form')
                 .send(o)
                 .end(function(res) {
-                    console.log(arguments);
+                    var token = stringQs(res.text);
+                    console.log(token);
                 });
         };
     </script>
