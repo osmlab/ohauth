@@ -29,7 +29,7 @@
                     var at = 'http://api06.dev.openstreetmap.org/oauth/authorize?';
                     window.location = at + qsString({
                         oauth_token: token.oauth_token,
-                        oauth_callback: 'http://localhost:3000/'
+                        oauth_callback: location.href
                     });
                 });
         };
