@@ -9,14 +9,20 @@
     <script type="text/javascript" src="ohauth.js"></script>
     <script>
         var o = {
+            // api06
             oauth_consumer_key: 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
+            // localhost
+            // oauth_consumer_key: 'CFy7eZe8HdpGzMIEdpOUdj8jBxQhnMelbdFgxogX',
             oauth_signature_method: 'HMAC-SHA1'
         };
+        // local
+        // var host = 'http://localhost:3000';
+        var host = 'http://api06.dev.openstreetmap.org';
         var oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p';
         document.getElementById('authenticate').onclick = function() {
             o.oauth_timestamp = ohauth.timestamp();
             o.oauth_nonce = ohauth.nonce();
-            var url = 'http://api06.dev.openstreetmap.org/oauth/request_token';
+            var url = host + '/oauth/request_token';
             o.oauth_signature = sha1().b64_hmac_sha1(
                 ohauth.percentEncode(oauth_secret) + '&',
                 ohauth.baseString('POST', url, o));
@@ -26,7 +32,8 @@
                 .send(o)
                 .end(function(res) {
                     var token = stringQs(res.text);
-                    var at = 'http://api06.dev.openstreetmap.org/oauth/authorize?';
+                    document.cookie = 'ohauth_token_secret=' + token.oauth_token_secret;
+                    var at = host + '/oauth/authorize?';
                     window.location = at + qsString({
                         oauth_token: token.oauth_token,
                         oauth_callback: location.href
@@ -39,9 +46,12 @@
             o.oauth_timestamp = ohauth.timestamp();
             o.oauth_nonce = ohauth.nonce();
             o.oauth_token = oauth_token.oauth_token;
-            var url = 'http://api06.dev.openstreetmap.org/oauth/access_token';
+            var url = host + '/oauth/access_token';
+            var token_secret = document.cookie.match(/ohauth_token_secret=([^;]+)/);
+            if (!token_secret) return console.error('Required token not found');
             o.oauth_signature = sha1().b64_hmac_sha1(
-                ohauth.percentEncode(oauth_secret) + '&',
+            ohauth.percentEncode(oauth_secret) + '&' +
+                ohauth.percentEncode(token_secret[1]),
                 ohauth.baseString('POST', url, o));
             superagent
                 .post(url)
