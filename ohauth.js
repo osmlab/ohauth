@@ -14,25 +14,29 @@ function stringQs(str) {
     }, {});
 }
 
+ohauth.post = function(url, data, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState && 0 !== xhr.status) callback(xhr);
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(data);
+};
+
 ohauth.nonce = function() {
-    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz',
-        result = '';
-    for (var i = 0; i < 6; ++i) {
-        var rnum = Math.floor(Math.random() * 61);
-        result += chars.substring(rnum, rnum + 1);
+    for (var o = ''; o.length < 6;) {
+        o += '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'[Math.floor(Math.random() * 61)];
     }
-    return result;
+    return o;
 };
 
 ohauth.timestamp = function() { return ~~((+new Date()) / 1000); };
 
 ohauth.percentEncode = function(s) {
     return encodeURIComponent(s)
-        .replace(/\!/g, '%21')
-        .replace(/\*/g, '%2A')
-        .replace(/\'/g, '%27')
-        .replace(/\(/g, '%28')
-        .replace(/\)/g, '%29');
+    .replace(/\!/g, '%21').replace(/\'/g, '%27')
+    .replace(/\*/g, '%2A').replace(/\(/g, '%28').replace(/\)/g, '%29');
 };
 
 ohauth.baseString = function(method, url, params) {
