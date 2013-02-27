@@ -1,0 +1,39 @@
+{
+  "name": "ohauth",
+  "version": "0.0.0",
+  "description": "browser oauth",
+  "main": "ohauth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tmcw/ohauth.git"
+  },
+  "keywords": [
+    "oauth",
+    "browser"
+  ],
+  "testling": {
+    "files": [
+        "sha.js",
+        "test/*.js"
+    ],
+    "harness" : "mocha",
+    "browsers": {
+      "ie": [ 8, 9 ],
+      "firefox": [ 13 ],
+      "chrome": [ 20 ],
+      "safari": [ 5.1 ],
+      "opera": [ 12 ]
+    }
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0",
+    "mocha": "~1.8"
+  },
+  "author": "Tom MacWright",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "f02143437a66c54d333ff55ceba1ed594dc87702"
+}
