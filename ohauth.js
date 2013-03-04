@@ -19,9 +19,16 @@ ohauth.stringQs = function(str) {
 };
 
 ohauth.xhr = function(method, url, auth, data, options, callback) {
-    var xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest(),
+        twoHundred = /^20\d$/;
     xhr.onreadystatechange = function() {
-        if (4 == xhr.readyState && 0 !== xhr.status) callback(xhr);
+        if (4 == xhr.readyState && 0 !== xhr.status) {
+            if (twoHundred.test(xhr.status)) {
+                callback(null, xhr);
+            } else {
+                callback(xhr, null);
+            }
+        }
     };
     var headers = (options && options.header) || { 'Content-Type': 'application/x-www-form-urlencoded' };
     xhr.open(method, url, true);
@@ -68,4 +75,7 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
 
 context.ohauth = ohauth;
 
+if (typeof module !== 'undefined') module.exports = ohauth;
+
 })(this);
+
