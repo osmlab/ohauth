@@ -1,5 +1,6 @@
 if (typeof require !== 'undefined') {
     expect = require('expect.js');
+    ohauth = require('../');
 }
 
 describe('ohauth', function() {

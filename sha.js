@@ -189,3 +189,4 @@ function sha1() {
     return { b64_hmac_sha1: b64_hmac_sha1 };
 }
 
+if (typeof module !== 'undefined') module.exports = sha1;

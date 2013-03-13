@@ -1,5 +1,7 @@
 (function(context) {
 
+var sha1 = sha1 || require && require('./sha');
+
 var ohauth = {};
 
 ohauth.qsString = function(obj) {
