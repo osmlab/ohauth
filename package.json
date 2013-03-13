@@ -21,7 +21,7 @@
     ],
     "harness" : "mocha",
     "browsers": {
-      "ie": [ 8, 9 ],
+      "ie": [ 9, 10 ],
       "firefox": [ 13 ],
       "chrome": [ 20 ],
       "safari": [ 5.1 ],
