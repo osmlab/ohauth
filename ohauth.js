@@ -4,7 +4,8 @@ var ohauth = {};
 
 ohauth.qsString = function(obj) {
     return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+        return encodeURIComponent(key) + '=' +
+            encodeURIComponent(obj[key]);
     }).join('&');
 };
 
@@ -13,29 +14,32 @@ ohauth.sha = sha1();
 ohauth.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
-        obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+        obj[parts[0]] = (null === parts[1]) ?
+            '' : decodeURIComponent(parts[1]);
         return obj;
     }, {});
 };
 
-ohauth.xhr = function(method, url, auth, data, options, callback) {
-    var xhr = new XMLHttpRequest(),
-        twoHundred = /^20\d$/;
+ohauth.rawxhr = function(method, url, data, headers, callback) {
+    var xhr = new XMLHttpRequest(), twoHundred = /^20\d$/;
     xhr.onreadystatechange = function() {
         if (4 == xhr.readyState && 0 !== xhr.status) {
-            if (twoHundred.test(xhr.status)) {
-                callback(null, xhr);
-            } else {
-                callback(xhr, null);
-            }
+            if (twoHundred.test(xhr.status)) callback(null, xhr);
+            else return callback(xhr, null);
         }
     };
     xhr.onerror = function(e) { return callback(e, null); };
-    var headers = (options && options.header) || { 'Content-Type': 'application/x-www-form-urlencoded' };
     xhr.open(method, url, true);
-    xhr.setRequestHeader('Authorization', 'OAuth ' + ohauth.authHeader(auth));
     for (var h in headers) xhr.setRequestHeader(h, headers[h]);
     xhr.send(data);
+};
+
+ohauth.xhr = function(method, url, auth, data, options, callback) {
+    var headers = (options && options.header) || {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    headers.Authorization = 'OAuth ' + ohauth.authHeader(auth);
+    ohauth.rawxhr(method, url, auth, data, headers, callback);
 };
 
 ohauth.nonce = function() {
@@ -55,8 +59,8 @@ ohauth.timestamp = function() { return ~~((+new Date()) / 1000); };
 
 ohauth.percentEncode = function(s) {
     return encodeURIComponent(s)
-    .replace(/\!/g, '%21').replace(/\'/g, '%27')
-    .replace(/\*/g, '%2A').replace(/\(/g, '%28').replace(/\)/g, '%29');
+        .replace(/\!/g, '%21').replace(/\'/g, '%27')
+        .replace(/\*/g, '%2A').replace(/\(/g, '%28').replace(/\)/g, '%29');
 };
 
 ohauth.baseString = function(method, url, params) {
@@ -75,5 +79,8 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
 };
 
 context.ohauth = ohauth;
+
+// export for npm/browserify compatibility
+if (typeof module !== 'undefined') module.exports = ohauth;
 
 })(this);

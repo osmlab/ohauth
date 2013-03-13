@@ -10,6 +10,13 @@ If you use this on a server [different from the one authenticated against](http:
 you'll need to [enable](http://enable-cors.org/) and use [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 for cross-origin resources. CORS is not available in IE before version IE10.
 
+### Compatibility
+
+* [OpenStreetMap](http://www.openstreetmap.org/) full & tested with iD
+* GitHub - partial, full flow is not possible because `access_token` API is not CORS-enabled
+
+### API
+
 ```js
 // generates an oauth-friendly timestamp
 ohauth.timestamp();
