@@ -1,6 +1,8 @@
 (function(context) {
 
-var sha1 = sha1 || require && require('./sha');
+if (typeof module !== 'undefined') {
+    var sha1 = require('./sha');
+}
 
 var ohauth = {};
 
