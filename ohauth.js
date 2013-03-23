@@ -43,7 +43,7 @@ ohauth.xhr = function(method, url, auth, data, options, callback) {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
     headers.Authorization = 'OAuth ' + ohauth.authHeader(auth);
-    ohauth.rawxhr(method, url, auth, data, headers, callback);
+    ohauth.rawxhr(method, url, data, headers, callback);
 };
 
 ohauth.nonce = function() {
