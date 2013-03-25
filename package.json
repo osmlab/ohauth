@@ -1,8 +1,8 @@
 {
   "name": "ohauth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "browser oauth",
-  "main": "ohauth.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,16 +16,27 @@
   ],
   "testling": {
     "files": [
-        "sha.js",
-        "test/*.js"
+      "sha.js",
+      "test/*.js"
     ],
-    "harness" : "mocha",
+    "harness": "mocha",
     "browsers": {
-      "ie": [ 9, 10 ],
-      "firefox": [ 13 ],
-      "chrome": [ 20 ],
-      "safari": [ 5.1 ],
-      "opera": [ 12 ]
+      "ie": [
+        9,
+        10
+      ],
+      "firefox": [
+        13
+      ],
+      "chrome": [
+        20
+      ],
+      "safari": [
+        5.1
+      ],
+      "opera": [
+        12
+      ]
     }
   },
   "devDependencies": {
@@ -35,5 +46,8 @@
   "author": "Tom MacWright",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "f02143437a66c54d333ff55ceba1ed594dc87702"
+  "gitHead": "f02143437a66c54d333ff55ceba1ed594dc87702",
+  "dependencies": {
+    "jshashes": "~1.0.1"
+  }
 }

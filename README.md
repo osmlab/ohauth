@@ -12,6 +12,17 @@ If you use this on a server [different from the one authenticated against](http:
 you'll need to [enable](http://enable-cors.org/) and use [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 for cross-origin resources. CORS is not available in IE before version IE10.
 
+### Usage
+
+As a file
+
+    wget https://raw.github.com/osmlab/ohauth/gh-pages/ohauth.js
+
+With browserify
+
+    npm install ohauth
+    var ohauth = require('ohauth');
+
 ### Compatibility
 
 * [OpenStreetMap](http://www.openstreetmap.org/) full & tested with iD
