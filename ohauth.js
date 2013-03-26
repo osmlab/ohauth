@@ -1,9 +1,7 @@
-;(function(e,t,n,r){function i(r){if(!n[r]){if(!t[r]){if(e)return e(r);throw new Error("Cannot find module '"+r+"'")}var s=n[r]={exports:{}};t[r][0](function(e){var n=t[r][1][e];return i(n?n:e)},s,s.exports)}return n[r].exports}for(var s=0;s<r.length;s++)i(r[s]);return i})(typeof require!=="undefined"&&require,{1:[function(require,module,exports){
-window.ohauth = require('./');
-
-},{"./":2}],2:[function(require,module,exports){
+(function(e){if("function"==typeof bootstrap)bootstrap("ohauth",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeOhauth=e}else"undefined"!=typeof window?window.ohauth=e():global.ohauth=e()})(function(){var define,ses,bootstrap,module,exports;
+return (function(e,t,n){function r(n,i){if(!t[n]){if(!e[n]){var s=typeof require=="function"&&require;if(!i&&s)return s(n,!0);throw new Error("Cannot find module '"+n+"'")}var o=t[n]={exports:{}};e[n][0](function(t){var i=e[n][1][t];return r(i?i:t)},o,o.exports)}return t[n].exports}for(var i=0;i<n.length;i++)r(n[i]);return r})({1:[function(require,module,exports){
 var hashes = require('jshashes'),
-    sha1 = new Hashes.SHA1();
+    sha1 = new hashes.SHA1();
 
 var ohauth = {};
 
@@ -83,7 +81,7 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
 
 module.exports = ohauth;
 
-},{"jshashes":3}],3:[function(require,module,exports){
+},{"jshashes":2}],2:[function(require,module,exports){
 (function(global){/**
  * jsHashes - A fast and independent hashing library pure JavaScript implemented for both server and client side
  * 
@@ -1695,5 +1693,6 @@ module.exports = ohauth;
   }( this ));
 }()); // IIFE
 })(window)
-},{}]},{},[1])
+},{}]},{},[1])(1)
+});
 ;

@@ -1,2 +1,2 @@
 ohauth.js: index.js
-	browserify req.js > ohauth.js
+	browserify index.js -s ohauth > ohauth.js
