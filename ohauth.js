@@ -1,5 +1,7 @@
 (function(e){if("function"==typeof bootstrap)bootstrap("ohauth",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeOhauth=e}else"undefined"!=typeof window?window.ohauth=e():global.ohauth=e()})(function(){var define,ses,bootstrap,module,exports;
 return (function(e,t,n){function r(n,i){if(!t[n]){if(!e[n]){var s=typeof require=="function"&&require;if(!i&&s)return s(n,!0);throw new Error("Cannot find module '"+n+"'")}var o=t[n]={exports:{}};e[n][0](function(t){var i=e[n][1][t];return r(i?i:t)},o,o.exports)}return t[n].exports}for(var i=0;i<n.length;i++)r(n[i]);return r})({1:[function(require,module,exports){
+'use strict';
+
 var hashes = require('jshashes'),
     sha1 = new hashes.SHA1();
 
@@ -22,7 +24,8 @@ ohauth.stringQs = function(str) {
 };
 
 ohauth.rawxhr = function(method, url, data, headers, callback) {
-    var xhr = new XMLHttpRequest(), twoHundred = /^20\d$/;
+    var xhr = new XMLHttpRequest(),
+        twoHundred = /^20\d$/;
     xhr.onreadystatechange = function() {
         if (4 == xhr.readyState && 0 !== xhr.status) {
             if (twoHundred.test(xhr.status)) callback(null, xhr);

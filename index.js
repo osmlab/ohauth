@@ -1,3 +1,5 @@
+'use strict';
+
 var hashes = require('jshashes'),
     sha1 = new hashes.SHA1();
 
@@ -20,7 +22,8 @@ ohauth.stringQs = function(str) {
 };
 
 ohauth.rawxhr = function(method, url, data, headers, callback) {
-    var xhr = new XMLHttpRequest(), twoHundred = /^20\d$/;
+    var xhr = new XMLHttpRequest(),
+        twoHundred = /^20\d$/;
     xhr.onreadystatechange = function() {
         if (4 == xhr.readyState && 0 !== xhr.status) {
             if (twoHundred.test(xhr.status)) callback(null, xhr);
