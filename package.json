@@ -48,6 +48,6 @@
   "readmeFilename": "README.md",
   "gitHead": "f02143437a66c54d333ff55ceba1ed594dc87702",
   "dependencies": {
-    "jshashes": "~1.0.1"
+    "jshashes": "~1.0.3"
   }
 }
