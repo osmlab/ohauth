@@ -42,4 +42,11 @@ describe('ohauth', function() {
             expect(ohauth.percentEncode('foo bar')).to.eql('foo%20bar');
         });
     });
+
+    describe('#headerGenerator', function() {
+        it('generates a header function', function() {
+            expect(ohauth.headerGenerator({})).to.be.a(Function);
+            expect(ohauth.headerGenerator({})('GET', 'http://foo.com/')).to.be.a.string;
+        });
+    });
 });

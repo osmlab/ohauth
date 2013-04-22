@@ -1,6 +1,7 @@
 'use strict';
 
 var hashes = require('jshashes'),
+    xtend = require('xtend'),
     sha1 = new hashes.SHA1();
 
 var ohauth = {};
@@ -80,18 +81,6 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
         baseString);
 };
 
-// Little helper function for copying properties
-function put(obj) {
-    var param, input, i;
-    for (i = 1; i < arguments.length; ++i) {
-        input = arguments[i] || {};
-        for (param in input) {
-            obj[param] = input[param];
-        }
-    }
-    return obj;
-}
-
 /**
  * Takes an options object for configuration (consumer_key,
  * consumer_secret, version, signature_method, token) and returns a
@@ -107,6 +96,7 @@ function put(obj) {
  */
 
 ohauth.headerGenerator = function (options) {
+    options = options || {};
     var consumer_key = options.consumer_key || '',
         consumer_secret = options.consumer_secret || '',
         signature_method = options.signature_method || 'HMAC-SHA1',
@@ -135,7 +125,7 @@ ohauth.headerGenerator = function (options) {
 
         if (token) oauth_params.oauth_token = token;
 
-        var all_params = put({}, oauth_params, query_params, extra_params),
+        var all_params = xtend({}, oauth_params, query_params, extra_params),
             base_str = ohauth.baseString(method, base_uri, all_params);
 
         oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);

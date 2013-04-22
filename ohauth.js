@@ -3,6 +3,7 @@ return (function(e,t,n){function r(n,i){if(!t[n]){if(!e[n]){var s=typeof require
 'use strict';
 
 var hashes = require('jshashes'),
+    xtend = require('xtend'),
     sha1 = new hashes.SHA1();
 
 var ohauth = {};
@@ -82,18 +83,6 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
         baseString);
 };
 
-// Little helper function for copying properties
-function put(obj) {
-    var param, input, i;
-    for (i = 1; i < arguments.length; ++i) {
-        input = arguments[i] || {};
-        for (param in input) {
-            obj[param] = input[param];
-        }
-    }
-    return obj;
-}
-
 /**
  * Takes an options object for configuration (consumer_key,
  * consumer_secret, version, signature_method, token) and returns a
@@ -109,6 +98,7 @@ function put(obj) {
  */
 
 ohauth.headerGenerator = function (options) {
+    options = options || {};
     var consumer_key = options.consumer_key || '',
         consumer_secret = options.consumer_secret || '',
         signature_method = options.signature_method || 'HMAC-SHA1',
@@ -137,7 +127,7 @@ ohauth.headerGenerator = function (options) {
 
         if (token) oauth_params.oauth_token = token;
 
-        var all_params = put({}, oauth_params, query_params, extra_params),
+        var all_params = xtend({}, oauth_params, query_params, extra_params),
             base_str = ohauth.baseString(method, base_uri, all_params);
 
         oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);
@@ -148,7 +138,45 @@ ohauth.headerGenerator = function (options) {
 
 module.exports = ohauth;
 
-},{"jshashes":2}],2:[function(require,module,exports){
+},{"xtend":2,"jshashes":3}],2:[function(require,module,exports){
+var Keys = Object.keys || objectKeys
+
+module.exports = extend
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        if (!isObject(source)) {
+            continue
+        }
+
+        var keys = Keys(source)
+
+        for (var j = 0; j < keys.length; j++) {
+            var name = keys[j]
+            target[name] = source[name]
+        }
+    }
+
+    return target
+}
+
+function objectKeys(obj) {
+    var keys = []
+    for (var k in obj) {
+        keys.push(k)
+    }
+    return keys
+}
+
+function isObject(obj) {
+    return obj !== null && typeof obj === "object"
+}
+
+},{}],3:[function(require,module,exports){
 (function(global){/**
  * jsHashes - A fast and independent hashing library pure JavaScript implemented (ES5 compliant) for both server and client side
  * 
