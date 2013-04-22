@@ -63,3 +63,19 @@ ohauth.qsString({ foo: 'bar' });
 ohauth.stringQs('foo=bar');
 // { foo: 'bar' }
 ```
+
+#### Just generating the headers
+
+```js
+// create a function holding configuration
+var auth = ohauth.headerGenerator({
+    consumer_key: '...',
+    consumer_secret: '...'
+});
+
+// pass just the data to produce the OAuth header with optional
+// POST data (as long as it'll be form-urlencoded in the request)
+var header = auth('GET', 'http://.../?a=1&b=2', { c: 3, d: 4 });
+// or pass the POST data as an form-urlencoded
+var header = auth('GET', 'http://.../?a=1&b=2', 'c=3&d=4');
+```

@@ -1,5 +1,5 @@
 (function(e){if("function"==typeof bootstrap)bootstrap("ohauth",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeOhauth=e}else"undefined"!=typeof window?window.ohauth=e():global.ohauth=e()})(function(){var define,ses,bootstrap,module,exports;
-return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0](function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
+return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
 'use strict';
 
 var hashes = require('jshashes'),
@@ -80,6 +80,70 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
         ohauth.percentEncode(oauth_secret) + '&' +
         ohauth.percentEncode(token_secret),
         baseString);
+};
+
+// Little helper function for copying properties
+var put = function (obj) {
+    var param, input, i;
+    for (i = 1; i < arguments.length; ++i) {
+        input = arguments[i] || {};
+        for (param in input) {
+            obj[param] = input[param];
+        }
+    }
+    return obj;
+};
+
+/**
+ * Takes an options object for configuration (consumer_key,
+ * consumer_secret, version, signature_method, token) and returns a
+ * function that generates the Authorization header for given data.
+ *
+ * The returned function takes these parameters:
+ * - method: GET/POST/...
+ * - uri: full URI with protocol, port, path and query string
+ * - extra_params: any extra parameters (that are passed in the POST data),
+ *   can be an object or a from-urlencoded string.
+ *
+ * Returned function returns full OAuth header with "OAuth" string in it.
+ */
+
+ohauth.headerGenerator = function (options) {
+    var consumer_key     = options.consumer_key     || '';
+    var consumer_secret  = options.consumer_secret  || '';
+    var signature_method = options.signature_method || 'HMAC-SHA1';
+    var version          = options.version          || '1.0';
+    var token            = options.token            || '';
+
+    return function (method, uri, extra_params) {
+        method = method.toUpperCase();
+        if (typeof extra_params === 'string' && extra_params.length > 0) {
+            extra_params = ohauth.stringQs(extra_params);
+        }
+
+        var uri_parts = uri.split('?', 2);
+        var base_uri = uri_parts[0];
+
+        var query_params = uri_parts.length === 2 ? ohauth.stringQs(uri_parts[1]) : {};
+
+        var oauth_params = {
+            oauth_consumer_key: consumer_key,
+            oauth_signature_method: signature_method,
+            oauth_version: version,
+            oauth_timestamp: ohauth.timestamp(),
+            oauth_nonce: ohauth.nonce()
+        };
+
+        if (token) oauth_params.oauth_token = token;
+
+        var all_params = put({}, oauth_params, query_params, extra_params);
+
+        var base_str = ohauth.baseString(method, base_uri, all_params);
+        oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);
+
+        var header = 'OAuth ' + ohauth.authHeader(oauth_params);
+        return header;
+    };
 };
 
 module.exports = ohauth;
