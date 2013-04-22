@@ -95,7 +95,7 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
  * Returned function returns full OAuth header with "OAuth" string in it.
  */
 
-ohauth.headerGenerator = function (options) {
+ohauth.headerGenerator = function(options) {
     options = options || {};
     var consumer_key = options.consumer_key || '',
         consumer_secret = options.consumer_secret || '',
@@ -103,7 +103,7 @@ ohauth.headerGenerator = function (options) {
         version = options.version || '1.0',
         token = options.token || '';
 
-    return function (method, uri, extra_params) {
+    return function(method, uri, extra_params) {
         method = method.toUpperCase();
         if (typeof extra_params === 'string' && extra_params.length > 0) {
             extra_params = ohauth.stringQs(extra_params);
