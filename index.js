@@ -83,8 +83,9 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
 
 /**
  * Takes an options object for configuration (consumer_key,
- * consumer_secret, version, signature_method, token) and returns a
- * function that generates the Authorization header for given data.
+ * consumer_secret, version, signature_method, token, token_secret)
+ * and returns a function that generates the Authorization header
+ * for given data.
  *
  * The returned function takes these parameters:
  * - method: GET/POST/...
@@ -101,7 +102,8 @@ ohauth.headerGenerator = function(options) {
         consumer_secret = options.consumer_secret || '',
         signature_method = options.signature_method || 'HMAC-SHA1',
         version = options.version || '1.0',
-        token = options.token || '';
+        token = options.token || '',
+        token_secret = options.token_secret || '';
 
     return function(method, uri, extra_params) {
         method = method.toUpperCase();
@@ -128,7 +130,7 @@ ohauth.headerGenerator = function(options) {
         var all_params = xtend({}, oauth_params, query_params, extra_params),
             base_str = ohauth.baseString(method, base_uri, all_params);
 
-        oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);
+        oauth_params.oauth_signature = ohauth.signature(consumer_secret, token_secret, base_str);
 
         return 'OAuth ' + ohauth.authHeader(oauth_params);
     };
