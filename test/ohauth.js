@@ -17,6 +17,9 @@ describe('ohauth', function() {
         it('turns a querystring into an object', function() {
             expect(ohauth.stringQs('foo=1')).to.eql({ foo: 1 });
         });
+        it('handles special characters', function() {
+            expect(ohauth.stringQs('%21%27%2A%28%29=%21%27%2A%28%29')).to.eql({ "!'*()": "!'*()" });
+        });
     });
 
     describe('#nonce', function() {

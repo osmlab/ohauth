@@ -16,7 +16,7 @@ ohauth.qsString = function(obj) {
 ohauth.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
-        obj[parts[0]] = (null === parts[1]) ?
+        obj[decodeURIComponent(parts[0])] = (null === parts[1]) ?
             '' : decodeURIComponent(parts[1]);
         return obj;
     }, {});
