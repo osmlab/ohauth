@@ -8,15 +8,15 @@ var ohauth = {};
 
 ohauth.qsString = function(obj) {
     return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' +
-            encodeURIComponent(obj[key]);
+        return ohauth.percentEncode(key) + '=' +
+            ohauth.percentEncode(obj[key]);
     }).join('&');
 };
 
 ohauth.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
-        obj[parts[0]] = (null === parts[1]) ?
+        obj[decodeURIComponent(parts[0])] = (null === parts[1]) ?
             '' : decodeURIComponent(parts[1]);
         return obj;
     }, {});
