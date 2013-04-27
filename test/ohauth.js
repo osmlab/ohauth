@@ -8,6 +8,9 @@ describe('ohauth', function() {
         it('turns an object into a querystring', function() {
             expect(ohauth.qsString({ foo: 1 })).to.eql('foo=1');
         });
+        it('escapes special characters', function() {
+            expect(ohauth.qsString({ "!'*()": "!'*()" })).to.eql('%21%27%2A%28%29=%21%27%2A%28%29');
+        });
     });
 
     describe('#stringQs', function() {
