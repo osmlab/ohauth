@@ -20,6 +20,10 @@ describe('ohauth', function() {
         it('handles special characters', function() {
             expect(ohauth.stringQs('%21%27%2A%28%29=%21%27%2A%28%29')).to.eql({ "!'*()": "!'*()" });
         });
+        it('handles querystrings with empty arguments', function() {
+            expect(ohauth.stringQs('')).to.eql({});
+            expect(ohauth.stringQs('foo=1&')).to.eql({ foo: 1 });
+        });
     });
 
     describe('#nonce', function() {
