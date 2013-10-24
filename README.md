@@ -36,12 +36,7 @@ ohauth.timestamp();
 ohauth.nonce();
 
 // generate a signature for an oauth request
-ohauth.signature({
-    oauth_consumer_key: '...',
-    oauth_signature_method: '...',
-    oauth_timestamp: '...',
-    oauth_nonce: '...'
-});
+ohauth.signature("myOauthSecret", "myTokenSecret", "percent&encoded&base&string");
 
 // make an oauth request.
 ohauth.xhr(method, url, auth, data, options, callback);
