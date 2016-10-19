@@ -1,14 +1,13 @@
 {
   "name": "ohauth",
   "version": "0.2.2",
-  "description": "browser oauth",
+  "description": "Pure-browser OAuth for CORS-supporting sites like OpenStreetMap",
   "main": "index.js",
+  "repository": "osmlab/ohauth",
+  "author": "Tom MacWright",
+  "license": "BSD",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/tmcw/ohauth.git"
   },
   "keywords": [
     "oauth",
@@ -39,16 +38,12 @@
       ]
     }
   },
-  "devDependencies": {
-    "expect.js": "~0.2.0",
-    "mocha": "~1.8"
-  },
-  "author": "Tom MacWright",
-  "license": "BSD",
-  "readmeFilename": "README.md",
-  "gitHead": "f02143437a66c54d333ff55ceba1ed594dc87702",
   "dependencies": {
     "jshashes": "~1.0.3",
     "xtend": "^4.0.0"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0",
+    "mocha": "~1.8"
   }
 }
