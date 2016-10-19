@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/ohauth.svg)](https://badge.fury.io/js/ohauth)
+
 ## ohauth
 
 [![](http://ci.testling.com/osmlab/ohauth.png)](http://ci.testling.com/osmlab/ohauth)
@@ -9,6 +11,10 @@ because this uses idiomatic Javascript.
 If you use this on a server [different from the one authenticated against](http://en.wikipedia.org/wiki/Same_origin_policy),
 you'll need to [enable](http://enable-cors.org/) and use [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 for cross-origin resources. CORS is not available in IE before version IE10.
+
+### Demo
+
+Try it out at:  https://osmlab.github.io/ohauth/
 
 ### Usage
 
