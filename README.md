@@ -14,7 +14,7 @@ for cross-origin resources. CORS is not available in IE before version IE10.
 
 ### Demo
 
-Try it out at:  https://osmlab.github.io/ohauth/
+Try it out at:  http://osmlab.github.io/ohauth/
 
 ### Usage
 
