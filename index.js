@@ -28,7 +28,7 @@ ohauth.rawxhr = function(method, url, data, headers, callback) {
     var xhr = new XMLHttpRequest(),
         twoHundred = /^20\d$/;
     xhr.onreadystatechange = function() {
-        if (4 == xhr.readyState && 0 !== xhr.status) {
+        if (4 === xhr.readyState && 0 !== xhr.status) {
             if (twoHundred.test(xhr.status)) callback(null, xhr);
             else return callback(xhr, null);
         }

@@ -6,16 +6,12 @@
   "repository": "osmlab/ohauth",
   "author": "Tom MacWright",
   "license": "ISC",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "oauth",
     "browser"
   ],
   "testling": {
     "files": [
-      "sha.js",
       "test/*.js"
     ],
     "harness": "mocha",
@@ -43,7 +39,11 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "expect.js": "~0.2.0",
-    "mocha": "~1.8"
+    "eslint": "~3.6.0",
+    "tap": "~7.1.0"
+  },
+  "scripts": {
+    "lint": "eslint index.js test/",
+    "test": "npm run lint && tap --cov test/*.js"
   }
 }

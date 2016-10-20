@@ -1,62 +1,82 @@
-if (typeof require !== 'undefined') {
-    expect = require('expect.js');
-    ohauth = require('../');
-}
+'use strict';
 
-describe('ohauth', function() {
-    describe('#qsString', function() {
-        it('turns an object into a querystring', function() {
-            expect(ohauth.qsString({ foo: 1 })).to.eql('foo=1');
+var test = require('tap').test;
+var ohauth = require('../.');
+
+test('ohauth', function(t) {
+    t.test('#qsString', function(t) {
+        t.test('turns an object into a querystring', function(t) {
+            t.deepEqual(ohauth.qsString({ foo: 1 }), 'foo=1');
+            t.end();
         });
-        it('escapes special characters', function() {
-            expect(ohauth.qsString({ "!'*()": "!'*()" })).to.eql('%21%27%2A%28%29=%21%27%2A%28%29');
+        t.test('escapes special characters', function(t) {
+            t.deepEqual(ohauth.qsString({ '!\'*()': '!\'*()' }), '%21%27%2A%28%29=%21%27%2A%28%29');
+            t.end();
         });
+        t.end();
     });
 
-    describe('#stringQs', function() {
-        it('turns a querystring into an object', function() {
-            expect(ohauth.stringQs('foo=1')).to.eql({ foo: 1 });
+    t.test('#stringQs', function(t) {
+        t.test('turns a querystring into an object', function(t) {
+            t.deepEqual(ohauth.stringQs('foo=1'), { foo: 1 });
+            t.end();
         });
-        it('handles special characters', function() {
-            expect(ohauth.stringQs('%21%27%2A%28%29=%21%27%2A%28%29')).to.eql({ "!'*()": "!'*()" });
+        t.test('handles special characters', function(t) {
+            t.deepEqual(ohauth.stringQs('%21%27%2A%28%29=%21%27%2A%28%29'), { '!\'*()': '!\'*()' });
+            t.end();
         });
-        it('handles querystrings with empty arguments', function() {
-            expect(ohauth.stringQs('')).to.eql({});
-            expect(ohauth.stringQs('foo=1&')).to.eql({ foo: 1 });
+        t.test('handles querystrings with empty arguments', function(t) {
+            t.deepEqual(ohauth.stringQs(''), {});
+            t.deepEqual(ohauth.stringQs('foo=1&'), { foo: 1 });
+            t.end();
         });
+        t.end();
     });
 
-    describe('#nonce', function() {
-        it('generates a 6-character nonce', function() {
-            expect(ohauth.nonce().length).to.eql(6);
+    t.test('#nonce', function(t) {
+        t.test('generates a 6-character nonce', function(t) {
+            t.deepEqual(ohauth.nonce().length, 6);
+            t.end();
         });
+        t.end();
     });
 
-    describe('#authHeader', function() {
-        it('encodes an auth header', function() {
-            expect(ohauth.authHeader({ foo: 'bar' })).to.eql('foo="bar"');
+    t.test('#authHeader', function(t) {
+        t.test('encodes an auth header', function(t) {
+            t.deepEqual(ohauth.authHeader({ foo: 'bar' }), 'foo="bar"');
+            t.end();
         });
+        t.end();
     });
 
-    describe('#timestamp', function() {
-        it('generates a numeric timestamp', function() {
-            expect(ohauth.timestamp()).to.be.an('number');
+    t.test('#timestamp', function(t) {
+        t.test('generates a numeric timestamp', function(t) {
+            t.type(ohauth.timestamp(), 'number');
+            t.end();
         });
-        it('generates an integer timestamp', function() {
-            expect(ohauth.timestamp() % 1).to.eql(0);
+        t.test('generates an integer timestamp', function(t) {
+            t.deepEqual(ohauth.timestamp() % 1, 0);
+            t.end();
         });
+        t.end();
     });
 
-    describe('#percentEncode', function() {
-        it('encodes spaces', function() {
-            expect(ohauth.percentEncode('foo bar')).to.eql('foo%20bar');
+    t.test('#percentEncode', function(t) {
+        t.test('encodes spaces', function(t) {
+            t.deepEqual(ohauth.percentEncode('foo bar'), 'foo%20bar');
+            t.end();
         });
+        t.end();
     });
 
-    describe('#headerGenerator', function() {
-        it('generates a header function', function() {
-            expect(ohauth.headerGenerator({})).to.be.a(Function);
-            expect(ohauth.headerGenerator({})('GET', 'http://foo.com/')).to.be.a.string;
+    t.test('#headerGenerator', function(t) {
+        t.test('generates a header function', function(t) {
+            t.type(ohauth.headerGenerator({}), 'function');
+            t.type(ohauth.headerGenerator({})('GET', 'http://foo.com/'), 'string');
+            t.end();
         });
+        t.end();
     });
+
+    t.end();
 });
