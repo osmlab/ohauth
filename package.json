@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "osmlab/ohauth",
   "author": "Tom MacWright",
-  "license": "BSD",
+  "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
