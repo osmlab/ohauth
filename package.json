@@ -10,30 +10,6 @@
     "oauth",
     "browser"
   ],
-  "testling": {
-    "files": [
-      "test/*.js"
-    ],
-    "harness": "mocha",
-    "browsers": {
-      "ie": [
-        9,
-        10
-      ],
-      "firefox": [
-        13
-      ],
-      "chrome": [
-        20
-      ],
-      "safari": [
-        5.1
-      ],
-      "opera": [
-        12
-      ]
-    }
-  },
   "dependencies": {
     "jshashes": "~1.0.3",
     "xtend": "^4.0.0"
