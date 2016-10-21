@@ -39,11 +39,13 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
+    "browserify": "~13.1.0",
     "eslint": "~3.6.0",
     "tap": "~7.1.0"
   },
   "scripts": {
+    "build": "browserify index.js -s ohauth > ohauth.js",
     "lint": "eslint index.js test/",
-    "test": "npm run lint && tap --cov test/*.js"
+    "test": "npm run build && npm run lint && tap --cov test/*.js"
   }
 }
