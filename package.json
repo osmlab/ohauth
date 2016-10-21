@@ -11,13 +11,13 @@
     "browser"
   ],
   "dependencies": {
-    "jshashes": "~1.0.3",
-    "xtend": "^4.0.0"
+    "jshashes": "~1.0.0",
+    "xtend": "~4.0.0"
   },
   "devDependencies": {
-    "browserify": "~13.1.0",
-    "eslint": "~3.6.0",
-    "tap": "~7.1.0"
+    "browserify": "^13.0.0",
+    "eslint": "^3.0.0",
+    "tap": "^7.0.0"
   },
   "scripts": {
     "build": "browserify index.js -s ohauth > ohauth.js",
