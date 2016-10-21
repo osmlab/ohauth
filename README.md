@@ -1,8 +1,7 @@
 [![npm version](https://badge.fury.io/js/ohauth.svg)](https://badge.fury.io/js/ohauth)
+[![Build Status](https://circleci.com/gh/osmlab/ohauth/tree/master.svg?style=shield)](https://circleci.com/gh/osmlab/ohauth)
 
 ## ohauth
-
-[![](http://ci.testling.com/osmlab/ohauth.png)](http://ci.testling.com/osmlab/ohauth)
 
 A most-of-the-way OAuth 1.0 client implementation in Javascript. Meant to be
 an improvement over the [default linked one](http://oauth.googlecode.com/svn/code/javascript/)
