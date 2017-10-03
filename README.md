@@ -1,6 +1,7 @@
 [![npm version](https://badge.fury.io/js/ohauth.svg)](https://badge.fury.io/js/ohauth)
-[![Build Status](https://circleci.com/gh/osmlab/ohauth/tree/master.svg?style=shield)](https://circleci.com/gh/osmlab/ohauth)
+[![Build Status](https://travis-ci.org/osmlab/ohauth.svg?branch=master)](https://travis-ci.org/osmlab/ohauth)
 [![Greenkeeper badge](https://badges.greenkeeper.io/osmlab/ohauth.svg)](https://greenkeeper.io/)
+
 
 ## ohauth
 
@@ -12,9 +13,11 @@ If you use this on a server [different from the one authenticated against](http:
 you'll need to [enable](http://enable-cors.org/) and use [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 for cross-origin resources. CORS is not available in IE before version IE10.
 
+
 ### Demo
 
 Try it out at:  http://osmlab.github.io/ohauth/
+
 
 ### Usage
 
@@ -27,10 +30,12 @@ With browserify
     npm install ohauth
     var ohauth = require('ohauth');
 
+
 ### Compatibility
 
 * [OpenStreetMap](http://www.openstreetmap.org/) full & tested with iD
 * GitHub - partial, full flow is not possible because `access_token` API is not CORS-enabled
+
 
 ### API
 
@@ -62,6 +67,7 @@ ohauth.qsString({ foo: 'bar' });
 ohauth.stringQs('foo=bar');
 // { foo: 'bar' }
 ```
+
 
 #### Just generating the headers
 
