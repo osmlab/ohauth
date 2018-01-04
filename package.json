@@ -15,7 +15,7 @@
     "xtend": "~4.0.0"
   },
   "devDependencies": {
-    "browserify": "^14.4.0",
+    "browserify": "^15.0.0",
     "eslint": "^4.2.0",
     "tap": "^10.7.0"
   },
