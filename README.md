@@ -1,6 +1,5 @@
+[![build](https://github.com/osmlab/ohauth/workflows/build/badge.svg)](https://github.com/osmlab/ohauth/actions?query=workflow%3A%22build%22)
 [![npm version](https://badge.fury.io/js/ohauth.svg)](https://badge.fury.io/js/ohauth)
-[![Build Status](https://travis-ci.org/osmlab/ohauth.svg?branch=master)](https://travis-ci.org/osmlab/ohauth)
-[![Greenkeeper badge](https://badges.greenkeeper.io/osmlab/ohauth.svg)](https://greenkeeper.io/)
 
 
 ## ohauth
