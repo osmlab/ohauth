@@ -143,7 +143,7 @@ ohauth.headerGenerator = function(options) {
 module.exports = ohauth;
 
 },{"jshashes":2,"xtend":3}],2:[function(require,module,exports){
-(function (global){
+(function (global){(function (){
 /**
  * jshashes - https://github.com/h2non/jshashes
  * Released under the "New BSD" license
@@ -424,7 +424,7 @@ module.exports = ohauth;
      * @property {String} version
      * @readonly
      */
-    VERSION: '1.0.5',
+    VERSION: '1.0.6',
     /**
      * @member Hashes
      * @class Base64
@@ -591,7 +591,7 @@ module.exports = ohauth;
        * See {@link Hashes.MD5#method-setUpperCase} and {@link Hashes.SHA1#method-setUpperCase}
        */
       var hexcase = (options && typeof options.uppercase === 'boolean') ? options.uppercase : false, // hexadecimal output case format. false - lowercase; true - uppercase
-        b64pad = (options && typeof options.pad === 'string') ? options.pda : '=', // base-64 pad character. Defaults to '=' for strict RFC compliance
+        b64pad = (options && typeof options.pad === 'string') ? options.pad : '=', // base-64 pad character. Defaults to '=' for strict RFC compliance
         utf8 = (options && typeof options.utf8 === 'boolean') ? options.utf8 : true; // enable/disable utf8 encoding
 
       // privileged (public) methods
@@ -828,7 +828,7 @@ module.exports = ohauth;
        * See {@link Hashes.MD5#method-setUpperCase} and {@link Hashes.SHA1#method-setUpperCase}
        */
       var hexcase = (options && typeof options.uppercase === 'boolean') ? options.uppercase : false, // hexadecimal output case format. false - lowercase; true - uppercase
-        b64pad = (options && typeof options.pad === 'string') ? options.pda : '=', // base-64 pad character. Defaults to '=' for strict RFC compliance
+        b64pad = (options && typeof options.pad === 'string') ? options.pad : '=', // base-64 pad character. Defaults to '=' for strict RFC compliance
         utf8 = (options && typeof options.utf8 === 'boolean') ? options.utf8 : true; // enable/disable utf8 encoding
 
       // public methods
@@ -947,7 +947,7 @@ module.exports = ohauth;
         x[((len + 64 >> 9) << 4) + 15] = len;
 
         for (i = 0; i < x.length; i += 16) {
-          olda = a,
+          olda = a;
           oldb = b;
           oldc = c;
           oldd = d;
@@ -1022,7 +1022,7 @@ module.exports = ohauth;
        * @see this.setPad() method
        */
       var hexcase = (options && typeof options.uppercase === 'boolean') ? options.uppercase : false, // hexadecimal output case format. false - lowercase; true - uppercase  */
-        b64pad = (options && typeof options.pad === 'string') ? options.pda : '=',
+        b64pad = (options && typeof options.pad === 'string') ? options.pad : '=',
         /* base-64 pad character. Default '=' for strict RFC compliance   */
         utf8 = (options && typeof options.utf8 === 'boolean') ? options.utf8 : true,
         /* enable/disable utf8 encoding */
@@ -1266,7 +1266,7 @@ module.exports = ohauth;
        */
       var hexcase = (options && typeof options.uppercase === 'boolean') ? options.uppercase : false,
         /* hexadecimal output case format. false - lowercase; true - uppercase  */
-        b64pad = (options && typeof options.pad === 'string') ? options.pda : '=',
+        b64pad = (options && typeof options.pad === 'string') ? options.pad : '=',
         /* base-64 pad character. Default '=' for strict RFC compliance   */
         utf8 = (options && typeof options.utf8 === 'boolean') ? options.utf8 : true,
         /* enable/disable utf8 encoding */
@@ -1644,7 +1644,7 @@ module.exports = ohauth;
        */
       var hexcase = (options && typeof options.uppercase === 'boolean') ? options.uppercase : false,
         /* hexadecimal output case format. false - lowercase; true - uppercase  */
-        b64pad = (options && typeof options.pad === 'string') ? options.pda : '=',
+        b64pad = (options && typeof options.pad === 'string') ? options.pa : '=',
         /* base-64 pad character. Default '=' for strict RFC compliance   */
         utf8 = (options && typeof options.utf8 === 'boolean') ? options.utf8 : true,
         /* enable/disable utf8 encoding */
@@ -1910,7 +1910,7 @@ module.exports = ohauth;
   }(this));
 }()); // IIFE
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],3:[function(require,module,exports){
 module.exports = extend
 
