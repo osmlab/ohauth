@@ -4,7 +4,10 @@
   "license": "ISC",
   "repository": "osmlab/ohauth",
   "description": "Pure-browser OAuth for CORS-supporting sites like OpenStreetMap",
-  "keywords": ["oauth", "browser"],
+  "keywords": [
+    "oauth",
+    "browser"
+  ],
   "contributors": [
     "Bryan Housel <bhousel@gmail.com> (https://github.com/bhousel)",
     "Tom MacWright <tom@macwright.com> (https://github.com/tmcw)"
@@ -17,13 +20,13 @@
   "devDependencies": {
     "browserify": "^17.0.0",
     "eslint": "^7.16.0",
-    "tap": "^14.11.0"
+    "tap": "^15.0.1"
   },
   "scripts": {
     "all": "npm run test",
     "build": "browserify index.js -s ohauth > ohauth.js",
     "lint": "eslint index.js test/",
-    "test": "npm run build && npm run lint && tap --cov test/*.js"
+    "test": "npm run build && npm run lint && tap --reporter terse --no-coverage test/*.js"
   },
   "engines": {
     "node": ">=10"
