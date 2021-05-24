@@ -2,8 +2,24 @@
 'use strict';
 
 var hashes = require('jshashes'),
-    xtend = require('xtend'),
     sha1 = new hashes.SHA1();
+
+
+// # xtend
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+function xtend() {
+    var target = {};
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+            if (hasOwnProperty.call(source, key)) {
+                target[key] = source[key];
+            }
+        }
+    }
+    return target;
+}
+
 
 var ohauth = {};
 
@@ -142,7 +158,7 @@ ohauth.headerGenerator = function(options) {
 
 module.exports = ohauth;
 
-},{"jshashes":2,"xtend":3}],2:[function(require,module,exports){
+},{"jshashes":2}],2:[function(require,module,exports){
 (function (global){(function (){
 /**
  * jshashes - https://github.com/h2non/jshashes
@@ -1911,26 +1927,5 @@ module.exports = ohauth;
 }()); // IIFE
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],3:[function(require,module,exports){
-module.exports = extend
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (hasOwnProperty.call(source, key)) {
-                target[key] = source[key]
-            }
-        }
-    }
-
-    return target
-}
-
 },{}]},{},[1])(1)
 });
