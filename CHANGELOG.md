@@ -1,5 +1,9 @@
 :warning: = Breaking change
 
+## 1.0.1
+##### 2021-Mau-24
+* remove xtend, to avoid deprecation warnings
+
 ## 1.0.0
 ##### 2016-Oct-21
 * Upgrade all dependencies

@@ -1,6 +1,6 @@
 {
   "name": "ohauth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "ISC",
   "repository": "osmlab/ohauth",
   "description": "Pure-browser OAuth for CORS-supporting sites like OpenStreetMap",
