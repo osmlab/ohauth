@@ -58,10 +58,11 @@ ohauth.rawxhr = function(method, url, data, headers, callback) {
 };
 
 ohauth.xhr = function(method, url, auth, data, options, callback) {
+    console.log("auth", auth)
     var headers = (options && options.header) || {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
-    headers.Authorization = 'OAuth ' + ohauth.authHeader(auth);
+    // headers.Authorization = 'Bearer ' + auth.oauth_token;
     return ohauth.rawxhr(method, url, data, headers, callback);
 };
 
