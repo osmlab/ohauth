@@ -57,12 +57,11 @@ ohauth.rawxhr = function(method, url, data, headers, callback) {
     return xhr;
 };
 
-ohauth.xhr = function(method, url, auth, data, options, callback) {
-    console.log("auth", auth)
+ohauth.xhr = function(method, url, access_token, data, options, callback) {
     var headers = (options && options.header) || {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
-    // headers.Authorization = 'Bearer ' + auth.oauth_token;
+    headers.Authorization = 'Bearer ' + access_token;
     return ohauth.rawxhr(method, url, data, headers, callback);
 };
 
