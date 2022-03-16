@@ -33,46 +33,9 @@ test('ohauth', function(t) {
     t.end();
   });
 
-  t.test('#nonce', function(t) {
-    t.test('generates a 6-character nonce', function(t) {
-      t.same(ohauth.nonce().length, 6);
-      t.end();
-    });
-    t.end();
-  });
-
-  t.test('#authHeader', function(t) {
-    t.test('encodes an auth header', function(t) {
-      t.same(ohauth.authHeader({ foo: 'bar' }), 'foo="bar"');
-      t.end();
-    });
-    t.end();
-  });
-
-  t.test('#timestamp', function(t) {
-    t.test('generates a numeric timestamp', function(t) {
-      t.type(ohauth.timestamp(), 'number');
-      t.end();
-    });
-    t.test('generates an integer timestamp', function(t) {
-      t.same(ohauth.timestamp() % 1, 0);
-      t.end();
-    });
-    t.end();
-  });
-
   t.test('#percentEncode', function(t) {
     t.test('encodes spaces', function(t) {
       t.same(ohauth.percentEncode('foo bar'), 'foo%20bar');
-      t.end();
-    });
-    t.end();
-  });
-
-  t.test('#headerGenerator', function(t) {
-    t.test('generates a header function', function(t) {
-      t.type(ohauth.headerGenerator({}), 'function');
-      t.type(ohauth.headerGenerator({})('GET', 'http://foo.com/'), 'string');
       t.end();
     });
     t.end();

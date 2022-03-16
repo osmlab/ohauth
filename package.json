@@ -13,9 +13,6 @@
     "Tom MacWright <tom@macwright.com> (https://github.com/tmcw)"
   ],
   "main": "index.js",
-  "dependencies": {
-    "jshashes": "~1.0.8"
-  },
   "devDependencies": {
     "browserify": "^17.0.0",
     "eslint": "^7.16.0",

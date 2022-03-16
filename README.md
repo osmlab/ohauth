@@ -39,17 +39,8 @@ With browserify
 ### API
 
 ```js
-// generates an oauth-friendly timestamp
-ohauth.timestamp();
-
-// generates an oauth-friendly nonce
-ohauth.nonce();
-
-// generate a signature for an oauth request
-ohauth.signature("myOauthSecret", "myTokenSecret", "percent&encoded&base&string");
-
 // make an oauth request.
-ohauth.xhr(method, url, auth, data, options, callback);
+ohauth.xhr(method, url, access_token, data, options, callback);
 
 // options can be a header like
 { header: { 'Content-Type': 'text/xml' } }
@@ -65,21 +56,4 @@ ohauth.qsString({ foo: 'bar' });
 // generate an object from a querystring
 ohauth.stringQs('foo=bar');
 // { foo: 'bar' }
-```
-
-
-#### Just generating the headers
-
-```js
-// create a function holding configuration
-var auth = ohauth.headerGenerator({
-    consumer_key: '...',
-    consumer_secret: '...'
-});
-
-// pass just the data to produce the OAuth header with optional
-// POST data (as long as it'll be form-urlencoded in the request)
-var header = auth('GET', 'http://.../?a=1&b=2', { c: 3, d: 4 });
-// or pass the POST data as an form-urlencoded
-var header = auth('GET', 'http://.../?a=1&b=2', 'c=3&d=4');
 ```
