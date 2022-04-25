@@ -19,7 +19,7 @@
   "devDependencies": {
     "browserify": "^17.0.0",
     "eslint": "^7.16.0",
-    "tap": "^15.0.1"
+    "tap": "^16.1.0"
   },
   "scripts": {
     "all": "npm run test",
