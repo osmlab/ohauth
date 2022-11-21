@@ -1,6 +1,9 @@
-[![build](https://github.com/osmlab/ohauth/workflows/build/badge.svg)](https://github.com/osmlab/ohauth/actions?query=workflow%3A%22build%22)
 [![npm version](https://badge.fury.io/js/ohauth.svg)](https://badge.fury.io/js/ohauth)
 
+<blockquote>
+<h3>⛔️ This project has been deprecated and will not receive any regular maintenance.</h3>
+The preferred authentication method for OpenStreetMap <a href="https://github.com/osmlab/osm-auth/pull/93">is now OAuth2</a>, therefore this library isn't used anymore.
+</blockquote>
 
 ## ohauth
 

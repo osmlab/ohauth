@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "license": "ISC",
   "repository": "osmlab/ohauth",
-  "description": "Pure-browser OAuth for CORS-supporting sites like OpenStreetMap",
+  "description": "DEPRECATED: JavaScript in-browser implemenation of OAuth1.0",
   "keywords": [
     "oauth",
     "browser"
